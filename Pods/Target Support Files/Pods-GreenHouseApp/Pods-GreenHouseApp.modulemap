@@ -1,0 +1,6 @@
+framework module Pods_GreenHouseApp {
+  umbrella header "Pods-GreenHouseApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D27508F99A40B9786AEC3AD /* Pods_GreenHouseApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05623D3C4C2C9AFB5C9B9DBE /* Pods_GreenHouseApp.framework */; };
 		7D45C917295C62A60081FF62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C916295C62A60081FF62 /* AppDelegate.swift */; };
 		7D45C919295C62A60081FF62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C918295C62A60081FF62 /* SceneDelegate.swift */; };
 		7D45C91B295C62A60081FF62 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C91A295C62A60081FF62 /* AuthorizationViewController.swift */; };
@@ -14,9 +15,13 @@
 		7D45C923295C62A90081FF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D45C922295C62A90081FF62 /* Assets.xcassets */; };
 		7D45C926295C62A90081FF62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D45C924295C62A90081FF62 /* LaunchScreen.storyboard */; };
 		7D45C92F295C6BB40081FF62 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C92E295C6BB40081FF62 /* AuthorizationView.swift */; };
+		7D45C933295CD1860081FF62 /* CodeValidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C932295CD1860081FF62 /* CodeValidViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05623D3C4C2C9AFB5C9B9DBE /* Pods_GreenHouseApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GreenHouseApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		17CC91FA786F2DF00D05F0F0 /* Pods-GreenHouseApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenHouseApp.release.xcconfig"; path = "Target Support Files/Pods-GreenHouseApp/Pods-GreenHouseApp.release.xcconfig"; sourceTree = "<group>"; };
+		6E0A379A28D8E153AA003C0D /* Pods-GreenHouseApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenHouseApp.debug.xcconfig"; path = "Target Support Files/Pods-GreenHouseApp/Pods-GreenHouseApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7D45C913295C62A60081FF62 /* GreenHouseApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenHouseApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D45C916295C62A60081FF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D45C918295C62A60081FF62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +31,7 @@
 		7D45C925295C62A90081FF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D45C927295C62A90081FF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D45C92E295C6BB40081FF62 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
+		7D45C932295CD1860081FF62 /* CodeValidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeValidViewController.swift; path = /Users/fastlee/Desktop/VadimProduct/GreenHouseApp/GreenHouseApp/Application/CodeValidViewController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D27508F99A40B9786AEC3AD /* Pods_GreenHouseApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7CAAB78B1D07430E28EDD48E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05623D3C4C2C9AFB5C9B9DBE /* Pods_GreenHouseApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7D45C90A295C62A60081FF62 = {
 			isa = PBXGroup;
 			children = (
 				7D45C915295C62A60081FF62 /* GreenHouseApp */,
 				7D45C914295C62A60081FF62 /* Products */,
+				98D48F98719A38CD9A097AB4 /* Pods */,
+				7CAAB78B1D07430E28EDD48E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				7D45C930295C6BBD0081FF62 /* Application */,
+				7D45C934295CD1960081FF62 /* CodeValidViewController */,
 				7D45C931295C6BDA0081FF62 /* AuthorizationView */,
 				7D45C92D295C679A0081FF62 /* Resources */,
 			);
@@ -94,6 +112,24 @@
 			path = AuthorizationView;
 			sourceTree = "<group>";
 		};
+		7D45C934295CD1960081FF62 /* CodeValidViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7D45C932295CD1860081FF62 /* CodeValidViewController.swift */,
+			);
+			name = CodeValidViewController;
+			path = AuthorizationView;
+			sourceTree = "<group>";
+		};
+		98D48F98719A38CD9A097AB4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E0A379A28D8E153AA003C0D /* Pods-GreenHouseApp.debug.xcconfig */,
+				17CC91FA786F2DF00D05F0F0 /* Pods-GreenHouseApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -101,9 +137,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D45C92A295C62A90081FF62 /* Build configuration list for PBXNativeTarget "GreenHouseApp" */;
 			buildPhases = (
+				BBB61D8300F028D2D45983CA /* [CP] Check Pods Manifest.lock */,
 				7D45C90F295C62A60081FF62 /* Sources */,
 				7D45C910295C62A60081FF62 /* Frameworks */,
 				7D45C911295C62A60081FF62 /* Resources */,
+				2657D1C12CF262CEF52205AD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -159,6 +197,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2657D1C12CF262CEF52205AD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GreenHouseApp/Pods-GreenHouseApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GreenHouseApp/Pods-GreenHouseApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GreenHouseApp/Pods-GreenHouseApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBB61D8300F028D2D45983CA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GreenHouseApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7D45C90F295C62A60081FF62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -168,6 +248,7 @@
 				7D45C91B295C62A60081FF62 /* AuthorizationViewController.swift in Sources */,
 				7D45C917295C62A60081FF62 /* AppDelegate.swift in Sources */,
 				7D45C92F295C6BB40081FF62 /* AuthorizationView.swift in Sources */,
+				7D45C933295CD1860081FF62 /* CodeValidViewController.swift in Sources */,
 				7D45C919295C62A60081FF62 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +385,7 @@
 		};
 		7D45C92B295C62A90081FF62 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E0A379A28D8E153AA003C0D /* Pods-GreenHouseApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -331,6 +413,7 @@
 		};
 		7D45C92C295C62A90081FF62 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17CC91FA786F2DF00D05F0F0 /* Pods-GreenHouseApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
