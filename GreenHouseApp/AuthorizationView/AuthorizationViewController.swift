@@ -70,6 +70,11 @@ extension AuthorizationViewController: FPNTextFieldDelegate {
 
 extension AuthorizationViewController: AuthorizationViewControllerDelegate  {
     func codeValidAction() {
+        
+        ApiManager.shared.sendAuthCode {
+            ///
+        }
+        
         let codeValidVC = CodeValidViewController()
         navigationController?.present(codeValidVC, animated: true)
     }
