@@ -60,20 +60,20 @@ enum ApiType {
 class ApiManager {
     static let shared = ApiManager()
     
-    func sendAuthCode(completion: @escaping () -> Void) {
+    func sendAuthCode(number: String, completion : @escaping (SendAuthCode?) -> ()) {
         var request = ApiType.sendAuthCode.request
-        let parameters = ["phone": "+79178851964"]
+        let parameters = ["phone": number]
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
         
         let task = URLSession.shared.dataTask(with: request) { (data, responce, error) in
             if let responce = responce {
-                print(responce)
+                //print(responce)
             }
             guard let data = data else { return }
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
+                let sendAuthCode = try? JSONDecoder().decode(SendAuthCode.self, from: data)
+                completion(sendAuthCode)
             } catch {
                 print(error)
             }

@@ -12,6 +12,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
 
     var listController: FPNCountryListViewController!
     var phoneNumber: String?
+    var responce : Bool?
     
     override func loadView() {
         self.view = AuthorizationView(frame: .zero)
@@ -70,13 +71,16 @@ extension AuthorizationViewController: FPNTextFieldDelegate {
 
 extension AuthorizationViewController: AuthorizationViewControllerDelegate  {
     func codeValidAction() {
-        
-        ApiManager.shared.sendAuthCode {
-            ///
+        let number = view().phoneTF.text!
+        ApiManager.shared.sendAuthCode(number: number) { data in
+            DispatchQueue.main.async {
+                self.responce = data?.isSuccess
+                if self.responce == true {
+                    let codeValidVC = CodeValidViewController()
+                    self.navigationController?.pushViewController(codeValidVC, animated: true)
+                }
+            }
         }
-        
-        let codeValidVC = CodeValidViewController()
-        navigationController?.present(codeValidVC, animated: true)
     }
 }
 
