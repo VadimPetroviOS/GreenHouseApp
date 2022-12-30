@@ -16,6 +16,7 @@
 		7D45C926295C62A90081FF62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D45C924295C62A90081FF62 /* LaunchScreen.storyboard */; };
 		7D45C92F295C6BB40081FF62 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C92E295C6BB40081FF62 /* AuthorizationView.swift */; };
 		7D45C933295CD1860081FF62 /* CodeValidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C932295CD1860081FF62 /* CodeValidViewController.swift */; };
+		7D81DC6B295F15A700D2C62E /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DC6A295F15A700D2C62E /* ApiManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		7D45C927295C62A90081FF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D45C92E295C6BB40081FF62 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 		7D45C932295CD1860081FF62 /* CodeValidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeValidViewController.swift; path = /Users/fastlee/Desktop/VadimProduct/GreenHouseApp/GreenHouseApp/Application/CodeValidViewController.swift; sourceTree = "<absolute>"; };
+		7D81DC6A295F15A700D2C62E /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				7D45C934295CD1960081FF62 /* CodeValidViewController */,
 				7D45C931295C6BDA0081FF62 /* AuthorizationView */,
 				7D45C92D295C679A0081FF62 /* Resources */,
+				7D81DC6C295F160700D2C62E /* Services */,
 			);
 			path = GreenHouseApp;
 			sourceTree = "<group>";
@@ -119,6 +122,14 @@
 			);
 			name = CodeValidViewController;
 			path = AuthorizationView;
+			sourceTree = "<group>";
+		};
+		7D81DC6C295F160700D2C62E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7D81DC6A295F15A700D2C62E /* ApiManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		98D48F98719A38CD9A097AB4 /* Pods */ = {
@@ -247,6 +258,7 @@
 				7D45C921295C62A60081FF62 /* GreenHouseApp.xcdatamodeld in Sources */,
 				7D45C91B295C62A60081FF62 /* AuthorizationViewController.swift in Sources */,
 				7D45C917295C62A60081FF62 /* AppDelegate.swift in Sources */,
+				7D81DC6B295F15A700D2C62E /* ApiManager.swift in Sources */,
 				7D45C92F295C6BB40081FF62 /* AuthorizationView.swift in Sources */,
 				7D45C933295CD1860081FF62 /* CodeValidViewController.swift in Sources */,
 				7D45C919295C62A60081FF62 /* SceneDelegate.swift in Sources */,
