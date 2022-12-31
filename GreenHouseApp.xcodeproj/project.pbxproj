@@ -18,6 +18,7 @@
 		7D45C933295CD1860081FF62 /* CodeValidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C932295CD1860081FF62 /* CodeValidViewController.swift */; };
 		7D81DC6B295F15A700D2C62E /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DC6A295F15A700D2C62E /* ApiManager.swift */; };
 		7D81DC6E295F34A700D2C62E /* SendAuthCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DC6D295F34A700D2C62E /* SendAuthCode.swift */; };
+		7D81DC70295F6F7800D2C62E /* CodeValidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DC6F295F6F7700D2C62E /* CodeValidView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		7D45C932295CD1860081FF62 /* CodeValidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeValidViewController.swift; path = /Users/fastlee/Desktop/VadimProduct/GreenHouseApp/GreenHouseApp/Application/CodeValidViewController.swift; sourceTree = "<absolute>"; };
 		7D81DC6A295F15A700D2C62E /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		7D81DC6D295F34A700D2C62E /* SendAuthCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAuthCode.swift; sourceTree = "<group>"; };
+		7D81DC6F295F6F7700D2C62E /* CodeValidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeValidView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				7D45C932295CD1860081FF62 /* CodeValidViewController.swift */,
+				7D81DC6F295F6F7700D2C62E /* CodeValidView.swift */,
 			);
 			name = CodeValidViewController;
 			path = AuthorizationView;
@@ -262,6 +265,7 @@
 				7D45C91B295C62A60081FF62 /* AuthorizationViewController.swift in Sources */,
 				7D45C917295C62A60081FF62 /* AppDelegate.swift in Sources */,
 				7D81DC6B295F15A700D2C62E /* ApiManager.swift in Sources */,
+				7D81DC70295F6F7800D2C62E /* CodeValidView.swift in Sources */,
 				7D81DC6E295F34A700D2C62E /* SendAuthCode.swift in Sources */,
 				7D45C92F295C6BB40081FF62 /* AuthorizationView.swift in Sources */,
 				7D45C933295CD1860081FF62 /* CodeValidViewController.swift in Sources */,

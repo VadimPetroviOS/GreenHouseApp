@@ -14,10 +14,7 @@ protocol AuthorizationViewControllerDelegate: AnyObject {
 
 class AuthorizationView: UIView {
     
-    
-    
     weak var delegate: AuthorizationViewControllerDelegate?
-    
     
     var phoneTF: FPNTextField = {
         let textField = FPNTextField()
