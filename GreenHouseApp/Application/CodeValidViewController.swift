@@ -8,6 +8,8 @@
 import UIKit
 
 class CodeValidViewController: UIViewController {
+    var phoneNumber: String
+    var responce : Bool?
     
     override func loadView() {
         self.view = CodeValidView()
@@ -30,6 +32,14 @@ class CodeValidViewController: UIViewController {
         self.view().codeTV.delegate = self
     }
     
+    init(phoneNumber: String) {
+        self.phoneNumber = phoneNumber
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("")
+    }
 }
 
 extension CodeValidViewController: UITextViewDelegate {
@@ -55,4 +65,18 @@ extension CodeValidViewController: UITextViewDelegate {
 }
 
 extension CodeValidViewController: CodeValidViewControllerDelegate  {
+    func logInAction() {
+        let code = view().codeTV.text!
+        ApiManager.shared.checkAuthCode(number: phoneNumber, authCode: code) { data in
+            DispatchQueue.main.async {
+                self.responce = data?.isUserExists
+                print(self.responce)
+                if self.responce == true {
+                    let logInVC = LogInViewController()
+                    self.navigationController?.pushViewController(logInVC, animated: true)
+                }
+            }
+        }
+    }
 }
+

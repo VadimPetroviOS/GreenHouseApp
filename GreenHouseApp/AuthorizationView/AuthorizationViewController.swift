@@ -71,12 +71,13 @@ extension AuthorizationViewController: FPNTextFieldDelegate {
 
 extension AuthorizationViewController: AuthorizationViewControllerDelegate  {
     func codeValidAction() {
-        let number = view().phoneTF.text!
+        let number = "+79219999999"
+        print(number)
         ApiManager.shared.sendAuthCode(number: number) { data in
             DispatchQueue.main.async {
                 self.responce = data?.isSuccess
                 if self.responce == true {
-                    let codeValidVC = CodeValidViewController()
+                    let codeValidVC = CodeValidViewController(phoneNumber: number)
                     self.navigationController?.pushViewController(codeValidVC, animated: true)
                 }
             }
