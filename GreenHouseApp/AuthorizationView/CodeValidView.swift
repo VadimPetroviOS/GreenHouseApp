@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CodeValidViewControllerDelegate: AnyObject {
-    
+    func logInAction()
 }
 
 class CodeValidView: UIView {
@@ -33,7 +33,7 @@ class CodeValidView: UIView {
         button.tintColor = .green
         button.layer.shadowColor = UIColor.black.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        //button.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
         UIView().layoutIfNeeded()
         return button
     }()
@@ -66,6 +66,10 @@ class CodeValidView: UIView {
             checkCodeButton.centerYAnchor.constraint(equalTo: codeTV.centerYAnchor),
             checkCodeButton.leadingAnchor.constraint(equalTo: codeTV.trailingAnchor, constant: 30),
         ])
+    }
+    
+    @objc func addPressed() {
+        delegate?.logInAction()
     }
 }
 

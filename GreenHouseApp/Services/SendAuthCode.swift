@@ -14,4 +14,3 @@ struct SendAuthCode: Codable {
         case isSuccess = "is_success"
     }
 }
-

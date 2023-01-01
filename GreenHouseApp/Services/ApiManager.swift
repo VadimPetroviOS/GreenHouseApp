@@ -50,6 +50,10 @@ enum ApiType {
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             return request
+        case .checkAuthCode:
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        return request
         default:
             request.httpMethod = "GET"
             return request
@@ -65,10 +69,9 @@ class ApiManager {
         let parameters = ["phone": number]
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
-        
         let task = URLSession.shared.dataTask(with: request) { (data, responce, error) in
             if let responce = responce {
-                //print(responce)
+                print(responce)
             }
             guard let data = data else { return }
             do {
@@ -80,5 +83,35 @@ class ApiManager {
         }.resume()
         
     }
+    
+    func checkAuthCode(number: String, authCode: String, completion : @escaping (CheckAuthCode?) -> ()) {
+        var request = ApiType.checkAuthCode.request
+        print(number)
+        print(authCode)
+        
+        let parameters : [String: String] = [
+            "phone": number,
+            "code": authCode
+        ]
+        
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        print(httpBody)
+        request.httpBody = httpBody
+        let task = URLSession.shared.dataTask(with: request) { (data, responce, error) in
+            if let responce = responce {
+                print(responce)
+            }
+            guard let data = data else { return }
+            do {
+                let checkAuthCode = try? JSONDecoder().decode(CheckAuthCode.self, from: data)
+                completion(checkAuthCode)
+            } catch {
+                print(error)
+            }
+        }.resume()
+        
+    }
 }
+
+//"[\"Hello\", \"JSON\"]".data(using: String.Encoding.utf8)
 
