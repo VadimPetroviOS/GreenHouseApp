@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CodeValidViewControllerDelegate: AnyObject {
-    func logInAction()
+    func signUpAction()
 }
 
 class CodeValidView: UIView {
@@ -69,7 +69,7 @@ class CodeValidView: UIView {
     }
     
     @objc func addPressed() {
-        delegate?.logInAction()
+        delegate?.signUpAction()
     }
 }
 

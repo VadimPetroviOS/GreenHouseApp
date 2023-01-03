@@ -20,7 +20,9 @@
 		7D81DC6E295F34A700D2C62E /* SendAuthCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DC6D295F34A700D2C62E /* SendAuthCode.swift */; };
 		7D81DC70295F6F7800D2C62E /* CodeValidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81DC6F295F6F7700D2C62E /* CodeValidView.swift */; };
 		7D97BD422961CF5800A4FBB6 /* CheckAuthCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97BD412961CF5800A4FBB6 /* CheckAuthCode.swift */; };
-		7D97BD442961D5E100A4FBB6 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97BD432961D5E100A4FBB6 /* LogInViewController.swift */; };
+		7D97BD442961D5E100A4FBB6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D97BD432961D5E100A4FBB6 /* SignUpViewController.swift */; };
+		7DB938F32962F58700C28F95 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB938F22962F58700C28F95 /* SignUpView.swift */; };
+		7DB938F6296324B100C28F95 /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB938F5296324B100C28F95 /* UserRegister.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +43,9 @@
 		7D81DC6D295F34A700D2C62E /* SendAuthCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAuthCode.swift; sourceTree = "<group>"; };
 		7D81DC6F295F6F7700D2C62E /* CodeValidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeValidView.swift; sourceTree = "<group>"; };
 		7D97BD412961CF5800A4FBB6 /* CheckAuthCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAuthCode.swift; sourceTree = "<group>"; };
-		7D97BD432961D5E100A4FBB6 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		7D97BD432961D5E100A4FBB6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		7DB938F22962F58700C28F95 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		7DB938F5296324B100C28F95 /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +71,6 @@
 		7D45C90A295C62A60081FF62 = {
 			isa = PBXGroup;
 			children = (
-				7D97BD432961D5E100A4FBB6 /* LogInViewController.swift */,
 				7D45C915295C62A60081FF62 /* GreenHouseApp */,
 				7D45C914295C62A60081FF62 /* Products */,
 				98D48F98719A38CD9A097AB4 /* Pods */,
@@ -90,6 +93,7 @@
 				7D45C934295CD1960081FF62 /* CodeValidViewController */,
 				7D45C931295C6BDA0081FF62 /* AuthorizationView */,
 				7D45C92D295C679A0081FF62 /* Resources */,
+				7DB938F42962F59200C28F95 /* SignInViewController */,
 				7D81DC6C295F160700D2C62E /* Services */,
 			);
 			path = GreenHouseApp;
@@ -140,8 +144,18 @@
 				7D81DC6A295F15A700D2C62E /* ApiManager.swift */,
 				7D81DC6D295F34A700D2C62E /* SendAuthCode.swift */,
 				7D97BD412961CF5800A4FBB6 /* CheckAuthCode.swift */,
+				7DB938F5296324B100C28F95 /* UserRegister.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		7DB938F42962F59200C28F95 /* SignInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7D97BD432961D5E100A4FBB6 /* SignUpViewController.swift */,
+				7DB938F22962F58700C28F95 /* SignUpView.swift */,
+			);
+			path = SignInViewController;
 			sourceTree = "<group>";
 		};
 		98D48F98719A38CD9A097AB4 /* Pods */ = {
@@ -269,10 +283,12 @@
 			files = (
 				7D45C921295C62A60081FF62 /* GreenHouseApp.xcdatamodeld in Sources */,
 				7D45C91B295C62A60081FF62 /* AuthorizationViewController.swift in Sources */,
-				7D97BD442961D5E100A4FBB6 /* LogInViewController.swift in Sources */,
+				7D97BD442961D5E100A4FBB6 /* SignUpViewController.swift in Sources */,
 				7D45C917295C62A60081FF62 /* AppDelegate.swift in Sources */,
+				7DB938F6296324B100C28F95 /* UserRegister.swift in Sources */,
 				7D81DC6B295F15A700D2C62E /* ApiManager.swift in Sources */,
 				7D81DC70295F6F7800D2C62E /* CodeValidView.swift in Sources */,
+				7DB938F32962F58700C28F95 /* SignUpView.swift in Sources */,
 				7D97BD422961CF5800A4FBB6 /* CheckAuthCode.swift in Sources */,
 				7D81DC6E295F34A700D2C62E /* SendAuthCode.swift in Sources */,
 				7D45C92F295C6BB40081FF62 /* AuthorizationView.swift in Sources */,
