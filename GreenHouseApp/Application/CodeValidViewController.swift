@@ -10,6 +10,8 @@ import UIKit
 class CodeValidViewController: UIViewController {
     var phoneNumber: String
     var responce : Bool?
+    var refreshToken: String?
+    var accessToken: String?
     
     override func loadView() {
         self.view = CodeValidView()
@@ -65,18 +67,20 @@ extension CodeValidViewController: UITextViewDelegate {
 }
 
 extension CodeValidViewController: CodeValidViewControllerDelegate  {
-    func logInAction() {
+    func signUpAction() {
         let code = view().codeTV.text!
         ApiManager.shared.checkAuthCode(number: phoneNumber, authCode: code) { data in
             DispatchQueue.main.async {
                 self.responce = data?.isUserExists
-                print(self.responce)
+                self.refreshToken = data?.refreshToken  // для чего?
+                self.accessToken = data?.accessToken    // для чего?
                 if self.responce == true {
-                    let logInVC = LogInViewController()
-                    self.navigationController?.pushViewController(logInVC, animated: true)
+                    let signUpVC = SignUpViewController()
+                    self.navigationController?.pushViewController(signUpVC, animated: true)
                 }
             }
         }
+        
     }
 }
 

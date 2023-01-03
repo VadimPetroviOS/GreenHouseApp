@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = ws
         
         let navContr = UINavigationController()
-        let vc = AuthorizationViewController()
+        //let vc = AuthorizationViewController()
+        let vc = SignUpViewController()
         navContr.viewControllers = [vc]
         
         window?.rootViewController = navContr

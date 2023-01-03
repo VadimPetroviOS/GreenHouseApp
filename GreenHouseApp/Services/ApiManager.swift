@@ -33,7 +33,7 @@ enum ApiType {
     var path: String {
         switch self {
         case .sendAuthCode: return "api/v1/users/send-auth-code/"
-        case .checkAuthCode: return "api/v1/users/check-auth-code"
+        case .checkAuthCode: return "api/v1/users/check-auth-code/"
         case .userRegister: return "api/v1/users/register/"
         case .getCurrentUser, .updateUser: return "api/v1/users/me/"
         case .refreshToken: return "api/v1/users/refresh-token/"
@@ -48,11 +48,14 @@ enum ApiType {
         switch self {
             case .sendAuthCode:
             request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             return request
         case .checkAuthCode:
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        return request
+        case .userRegister:
+        request.httpMethod = "POST"
         return request
         default:
             request.httpMethod = "GET"
@@ -81,37 +84,97 @@ class ApiManager {
                 print(error)
             }
         }.resume()
-        
     }
     
     func checkAuthCode(number: String, authCode: String, completion : @escaping (CheckAuthCode?) -> ()) {
         var request = ApiType.checkAuthCode.request
-        print(number)
-        print(authCode)
         
-        let parameters : [String: String] = [
-            "phone": number,
-            "code": authCode
+        let parameters : [String: AnyHashable] = [
+            "phone": "\(number)",
+            "code": "\(authCode)"
         ]
         
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        print(httpBody)
-        request.httpBody = httpBody
-        let task = URLSession.shared.dataTask(with: request) { (data, responce, error) in
-            if let responce = responce {
-                print(responce)
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed)
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data, error == nil else {
+                return
             }
-            guard let data = data else { return }
+            
             do {
-                let checkAuthCode = try? JSONDecoder().decode(CheckAuthCode.self, from: data)
-                completion(checkAuthCode)
-            } catch {
+                let responce = try JSONDecoder().decode(CheckAuthCode.self, from: data)
+                //print("SUCCESS: \(responce)")
+                completion(responce)
+            }
+            catch {
                 print(error)
             }
-        }.resume()
-        
+        }
+        task.resume()
     }
+    
+    func userRegister(number: String, name: String, userName: String, completion : @escaping (UserRegister?) -> ()) {
+        var request = ApiType.userRegister.request
+        
+        let parameters : [String: AnyHashable] = [
+            "phone": "\(number)",
+            "name": "\(name)",
+            "username": "\(userName)"
+        ]
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed)
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let responce = try JSONDecoder().decode(UserRegister.self, from: data)
+                print("SUCCESS: \(responce)")
+                //completion(responce)
+            }
+            catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    func checkAuthCode() {
+        guard let url = URL(string: "https://plannerok.ru/api/v1/users/check-auth-code/") else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let parameters : [String: AnyHashable] = [
+            "phone": "+79219999999",
+            "code": "133337"
+        ]
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data, error == nil else{
+                return
+            }
+            
+            do {
+                //let responce = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                let responce = try JSONDecoder().decode(CheckAuthCode.self, from: data)
+                print("SUCCESS: \(responce)")
+            }
+            catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
 }
-
-//"[\"Hello\", \"JSON\"]".data(using: String.Encoding.utf8)
-
