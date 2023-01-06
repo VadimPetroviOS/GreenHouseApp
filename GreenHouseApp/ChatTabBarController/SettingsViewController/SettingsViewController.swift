@@ -16,12 +16,17 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view().delegate = self
+        getPhoneAndName()
+        
     }
     
     func view() -> SettingsView {
        return self.view as! SettingsView
     }
     
+    private func getPhoneAndName() {
+        //ApiManager.shared
+    }
 }
 
 extension SettingsViewController: SettingsViewControllerDelegate  {

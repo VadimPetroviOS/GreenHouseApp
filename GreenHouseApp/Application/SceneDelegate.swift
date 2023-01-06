@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navContr = UINavigationController()
         //let vc = AuthorizationViewController()
-        let vc = ChatTabBarController()
+        let vc = AuthorizationViewController()
         navContr.viewControllers = [vc]
         
         window?.rootViewController = navContr

@@ -46,17 +46,21 @@ enum ApiType {
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = headers
         switch self {
-            case .sendAuthCode:
+        case .sendAuthCode:
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             return request
         case .checkAuthCode:
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        return request
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            return request
         case .userRegister:
-        request.httpMethod = "POST"
-        return request
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            return request
+        case .getCurrentUser:
+            request.httpMethod = "GET"
+            return request
         default:
             request.httpMethod = "GET"
             return request
@@ -74,7 +78,7 @@ class ApiManager {
         request.httpBody = httpBody
         let task = URLSession.shared.dataTask(with: request) { (data, responce, error) in
             if let responce = responce {
-                print(responce)
+                //print(responce)
             }
             guard let data = data else { return }
             do {
@@ -108,7 +112,7 @@ class ApiManager {
                 completion(responce)
             }
             catch {
-                print(error)
+                completion(nil)
             }
         }
         task.resume()
@@ -133,8 +137,8 @@ class ApiManager {
             
             do {
                 let responce = try JSONDecoder().decode(UserRegister.self, from: data)
-                print("SUCCESS: \(responce)")
-                //completion(responce)
+                //print("SUCCESS: \(responce)")
+                completion(responce)
             }
             catch {
                 print(error)
