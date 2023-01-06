@@ -30,6 +30,7 @@
 		7DB939022965C9C200C28F95 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB939012965C9C200C28F95 /* SettingsView.swift */; };
 		7DB9390429672AE900C28F95 /* SettingsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9390329672AE900C28F95 /* SettingsEditorViewController.swift */; };
 		7DB9390729674DEF00C28F95 /* SettingsEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9390629674DEF00C28F95 /* SettingsEditorView.swift */; };
+		7DB93909296875FF00C28F95 /* GetCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB93908296875FF00C28F95 /* GetCurrentUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		7DB939012965C9C200C28F95 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7DB9390329672AE900C28F95 /* SettingsEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditorViewController.swift; sourceTree = "<group>"; };
 		7DB9390629674DEF00C28F95 /* SettingsEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditorView.swift; sourceTree = "<group>"; };
+		7DB93908296875FF00C28F95 /* GetCurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrentUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				7D81DC6D295F34A700D2C62E /* SendAuthCode.swift */,
 				7D97BD412961CF5800A4FBB6 /* CheckAuthCode.swift */,
 				7DB938F5296324B100C28F95 /* UserRegister.swift */,
+				7DB93908296875FF00C28F95 /* GetCurrentUser.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				7DB938F82965AB2000C28F95 /* ChatTabBarController.swift in Sources */,
 				7DB938FF2965AC9000C28F95 /* SettingsViewController.swift in Sources */,
 				7D45C917295C62A60081FF62 /* AppDelegate.swift in Sources */,
+				7DB93909296875FF00C28F95 /* GetCurrentUser.swift in Sources */,
 				7DB938F6296324B100C28F95 /* UserRegister.swift in Sources */,
 				7D81DC6B295F15A700D2C62E /* ApiManager.swift in Sources */,
 				7D81DC70295F6F7800D2C62E /* CodeValidView.swift in Sources */,
