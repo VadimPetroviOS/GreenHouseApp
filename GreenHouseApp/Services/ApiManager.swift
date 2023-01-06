@@ -25,6 +25,8 @@ enum ApiType {
         switch self {
         case .checkAuthCode:
             return ["phone": "String"]
+        case .getCurrentUser:
+            return ["Authorization": "String"]
         default:
             return [:]
         }
@@ -60,6 +62,7 @@ enum ApiType {
             return request
         case .getCurrentUser:
             request.httpMethod = "GET"
+            request.setValue("application/json", forHTTPHeaderField: "accept")
             return request
         default:
             request.httpMethod = "GET"
@@ -147,38 +150,46 @@ class ApiManager {
         task.resume()
     }
     
-    func checkAuthCode() {
-        guard let url = URL(string: "https://plannerok.ru/api/v1/users/check-auth-code/") else {
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let parameters : [String: AnyHashable] = [
-            "phone": "+79219999999",
-            "code": "133337"
-        ]
-        
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data, error == nil else{
+    func getCurrentUser(accessToken: String, completion : @escaping (GetCurrentUser?) -> ()) {
+        var request = ApiType.getCurrentUser.request
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        let task = URLSession.shared.dataTask(with: request) { (data, responce, error) in
+            guard let data = data, error == nil else {
                 return
             }
+            let httpResponse = responce as! HTTPURLResponse
+            print(httpResponse.statusCode)
             
             do {
-                //let responce = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                let responce = try JSONDecoder().decode(CheckAuthCode.self, from: data)
+                let responce = try JSONDecoder().decode(GetCurrentUser.self, from: data)
                 print("SUCCESS: \(responce)")
+                //completion(responce)
             }
             catch {
-                print(error)
+                print("FAILURE: \(error)")
+                //completion(nil)
+                
             }
         }
         task.resume()
     }
-    
 }
+// 0101a4ab-d39f-4d4b-873c-5f20388bf207
+
+/* if request.setValue(accessToken, forHTTPHeaderField: "Authorization")
+ FAILURE: dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: Optional(Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around line 1, column 0." UserInfo={NSDebugDescription=Invalid value around line 1, column 0., NSJSONSerializationErrorIndex=0})))
+ */
+
+/* request.setValue("pipi", forHTTPHeaderField: "Authorization")
+ FAILURE: dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: Optional(Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around line 1, column 0." UserInfo={NSDebugDescription=Invalid value around line 1, column 0., NSJSONSerializationErrorIndex=0})))
+
+ */
+
+/* request.setValue("Bearer access token", forHTTPHeaderField: "Authorization")
+ FAILURE: keyNotFound(CodingKeys(stringValue: "profile_data", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"profile_data\", intValue: nil) (\"profile_data\").", underlyingError: nil))
+ */
+
+/*
+ FAILURE: typeMismatch(Swift.Double, Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "profile_data", intValue: nil), CodingKeys(stringValue: "created", intValue: nil)], debugDescription: "Expected to decode Double but found a string/data instead.", underlyingError: nil))
+
+ */

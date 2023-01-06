@@ -72,6 +72,7 @@ extension CodeValidViewController: CodeValidViewControllerDelegate  {
         ApiManager.shared.checkAuthCode(number: phoneNumber, authCode: code) { data in
             DispatchQueue.main.async {
                 self.responce = data?.isUserExists
+                let accessToken = data?.accessToken
                 if self.responce == true {
                     let chatVC = ChatTabBarController()
                     self.navigationController?.pushViewController(chatVC, animated: true)
@@ -79,8 +80,15 @@ extension CodeValidViewController: CodeValidViewControllerDelegate  {
                     let signUpVC = SignUpViewController(phoneNumber: self.phoneNumber)
                     self.navigationController?.pushViewController(signUpVC, animated: true)
                 }
+                //
+                ApiManager.shared.getCurrentUser(accessToken: accessToken!) { (data) in
+                    print("работает?")
+                }
+                
             }
         }
+        
+        
         
     }
 }
