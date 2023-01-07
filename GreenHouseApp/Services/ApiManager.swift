@@ -162,12 +162,12 @@ class ApiManager {
             
             do {
                 let responce = try JSONDecoder().decode(GetCurrentUser.self, from: data)
-                print("SUCCESS: \(responce)")
-                //completion(responce)
+                //print("SUCCESS: \(responce)")
+                completion(responce)
             }
             catch {
                 print("FAILURE: \(error)")
-                //completion(nil)
+                completion(nil)
                 
             }
         }
@@ -192,4 +192,8 @@ class ApiManager {
 /*
  FAILURE: typeMismatch(Swift.Double, Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "profile_data", intValue: nil), CodingKeys(stringValue: "created", intValue: nil)], debugDescription: "Expected to decode Double but found a string/data instead.", underlyingError: nil))
 
+ */
+
+/* let responce = try JSONDecoder().decode(SendAuthCode.self, from: data)
+ FAILURE: keyNotFound(CodingKeys(stringValue: "is_success", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"is_success\", intValue: nil) (\"is_success\").", underlyingError: nil))
  */

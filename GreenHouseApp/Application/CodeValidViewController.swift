@@ -73,17 +73,29 @@ extension CodeValidViewController: CodeValidViewControllerDelegate  {
             DispatchQueue.main.async {
                 self.responce = data?.isUserExists
                 let accessToken = data?.accessToken
-                if self.responce == true {
-                    let chatVC = ChatTabBarController()
-                    self.navigationController?.pushViewController(chatVC, animated: true)
-                } else {
-                    let signUpVC = SignUpViewController(phoneNumber: self.phoneNumber)
-                    self.navigationController?.pushViewController(signUpVC, animated: true)
+                // GET SettingsView
+                ApiManager.shared.getCurrentUser(accessToken: accessToken!) { (information) in
+                    let username = information?.profileData.username
+                    let city = information?.profileData.city
+                    let birthday = information?.profileData.birthday
+                    let vk = information?.profileData.vk
+                    let instagram = information?.profileData.instagram
+                    
+                    if self.responce == true {
+                        let chatVC = ChatTabBarController(phoneNumber: self.phoneNumber,
+                                                          username: username,
+                                                          city: city,
+                                                          birthday: birthday,
+                                                          vk: vk,
+                                                          instagram: instagram)
+                        self.navigationController?.pushViewController(chatVC, animated: true)
+                    } else {
+                        let signUpVC = SignUpViewController(phoneNumber: self.phoneNumber)
+                        self.navigationController?.pushViewController(signUpVC, animated: true)
+                    }
                 }
-                //
-                ApiManager.shared.getCurrentUser(accessToken: accessToken!) { (data) in
-                    print("работает?")
-                }
+                
+                
                 
             }
         }
