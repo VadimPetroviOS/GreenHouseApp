@@ -8,7 +8,13 @@
 import UIKit
 
 class ChatTabBarController: UITabBarController {
-
+    var phoneNumber: String
+    var username: String?
+    var city: String?
+    var birthday: String?
+    var vk: String?
+    var instagram: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewControllers = [
@@ -20,7 +26,12 @@ class ChatTabBarController: UITabBarController {
                                title: "Chats",
                                image: Images.messagesImage,
                                backgroundColor: Colors.grayBackground),
-            createNavControler(viewControler: SettingsViewController(),
+            createNavControler(viewControler: SettingsViewController(phoneNumber: self.phoneNumber,
+                                                                     username: self.username,
+                                                                     city: self.city,
+                                                                     birthday: self.birthday,
+                                                                     vk: self.vk,
+                                                                     instagram: self.instagram),
                                title: "Settings",
                                image: Images.settingsImage,
                                backgroundColor: Colors.grayBackground)
@@ -37,6 +48,21 @@ class ChatTabBarController: UITabBarController {
         navController.tabBarItem.title = title
         navController.tabBarItem.image = UIImage(systemName: image)
         return navController
+    }
+    
+    init(phoneNumber: String, username: String?, city: String?, birthday: String?, vk: String?, instagram: String?) {
+        self.phoneNumber = phoneNumber
+        self.username = username
+        self.city = city
+        self.birthday = birthday
+        self.vk = vk
+        self.instagram = instagram
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
     }
 }
 
