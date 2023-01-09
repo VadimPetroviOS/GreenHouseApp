@@ -3,4 +3,70 @@
    uuid = "A6B6CA2C-FB3C-4564-B9F7-74A652BEF978"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "965D5D5A-3977-4B90-B3EE-B1693F3A25AA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GreenHouseApp/ChatTabBarController/SettingsViewController/SettingsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "965D5D5A-3977-4B90-B3EE-B1693F3A25AA - 36315e8b73f1ee55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GreenHouseApp.SettingsViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "GreenHouseApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fastlee/Desktop/VadimProduct/GreenHouseApp/GreenHouseApp/ChatTabBarController/SettingsViewController/SettingsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "131">
+               </Location>
+               <Location
+                  uuid = "965D5D5A-3977-4B90-B3EE-B1693F3A25AA - 36315e8b73f1ee55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GreenHouseApp.SettingsViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "GreenHouseApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fastlee/Desktop/VadimProduct/GreenHouseApp/GreenHouseApp/ChatTabBarController/SettingsViewController/SettingsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "450">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1830AE33-C355-4717-BCA0-67698D3551E8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GreenHouseApp/Application/CodeValidViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "signUpAction()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

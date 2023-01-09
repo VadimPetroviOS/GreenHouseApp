@@ -8,12 +8,6 @@
 import UIKit
 
 class ChatTabBarController: UITabBarController {
-    var phoneNumber: String
-    var username: String?
-    var city: String?
-    var birthday: String?
-    var vk: String?
-    var instagram: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +20,14 @@ class ChatTabBarController: UITabBarController {
                                title: "Chats",
                                image: Images.messagesImage,
                                backgroundColor: Colors.grayBackground),
-            createNavControler(viewControler: SettingsViewController(phoneNumber: self.phoneNumber,
-                                                                     username: self.username,
-                                                                     city: self.city,
-                                                                     birthday: self.birthday,
-                                                                     vk: self.vk,
-                                                                     instagram: self.instagram),
+            createNavControler(viewControler: SettingsViewController(phoneNumber: Base.shared.userData[0].phone,
+                                                                     username: Base.shared.userData[0].username,
+                                                                     city: Base.shared.userData[0].city,
+                                                                     birthday: Base.shared.userData[0].birthday,
+                                                                     vk: Base.shared.userData[0].vk,
+                                                                     instagram: Base.shared.userData[0].instagram,
+                                                                     filename: Base.shared.userData[0].avatar.filename,
+                                                                     base64: Base.shared.userData[0].avatar.base64),
                                title: "Settings",
                                image: Images.settingsImage,
                                backgroundColor: Colors.grayBackground)
@@ -48,21 +44,6 @@ class ChatTabBarController: UITabBarController {
         navController.tabBarItem.title = title
         navController.tabBarItem.image = UIImage(systemName: image)
         return navController
-    }
-    
-    init(phoneNumber: String, username: String?, city: String?, birthday: String?, vk: String?, instagram: String?) {
-        self.phoneNumber = phoneNumber
-        self.username = username
-        self.city = city
-        self.birthday = birthday
-        self.vk = vk
-        self.instagram = instagram
-        super.init(nibName: nil, bundle: nil)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
     }
 }
 

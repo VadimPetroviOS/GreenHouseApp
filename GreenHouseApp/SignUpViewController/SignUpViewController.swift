@@ -37,8 +37,20 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController: SignUpViewControllerDelegate  {
     func chatBarAction() {
         let name = view().nameTF.text!
-        let userName = view().nicknameTF.text!
-        ApiManager.shared.userRegister(number: phoneNumber, name: name, userName: userName) { (data) in
+        let username = view().nicknameTF.text!
+        
+        Base.shared.saveData(phone: phoneNumber,
+                             name: name,
+                             username: username,
+                             city: nil,
+                             birthday: nil,
+                             vk: nil,
+                             instagram: nil,
+                             status: nil,
+                             filename: nil,
+                             base64: nil)
+        
+        ApiManager.shared.userRegister(number: phoneNumber, name: name, username: username) { (data) in
             DispatchQueue.main.async {
                 if data != nil {
                     let chatVC = ChatTabBarController()

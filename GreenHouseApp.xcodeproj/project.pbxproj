@@ -31,6 +31,8 @@
 		7DB9390429672AE900C28F95 /* SettingsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9390329672AE900C28F95 /* SettingsEditorViewController.swift */; };
 		7DB9390729674DEF00C28F95 /* SettingsEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9390629674DEF00C28F95 /* SettingsEditorView.swift */; };
 		7DB93909296875FF00C28F95 /* GetCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB93908296875FF00C28F95 /* GetCurrentUser.swift */; };
+		7DB9390B296B013F00C28F95 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9390A296B013F00C28F95 /* Base.swift */; };
+		7DB9390E296B541A00C28F95 /* UpdateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9390D296B541900C28F95 /* UpdateUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		7DB9390329672AE900C28F95 /* SettingsEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditorViewController.swift; sourceTree = "<group>"; };
 		7DB9390629674DEF00C28F95 /* SettingsEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditorView.swift; sourceTree = "<group>"; };
 		7DB93908296875FF00C28F95 /* GetCurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrentUser.swift; sourceTree = "<group>"; };
+		7DB9390A296B013F00C28F95 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
+		7DB9390D296B541900C28F95 /* UpdateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 				7D45C92D295C679A0081FF62 /* Resources */,
 				7DB938F42962F59200C28F95 /* SignUpViewController */,
 				7D81DC6C295F160700D2C62E /* Services */,
+				7DB9390C296B014800C28F95 /* Base */,
 			);
 			path = GreenHouseApp;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 				7D97BD412961CF5800A4FBB6 /* CheckAuthCode.swift */,
 				7DB938F5296324B100C28F95 /* UserRegister.swift */,
 				7DB93908296875FF00C28F95 /* GetCurrentUser.swift */,
+				7DB9390D296B541900C28F95 /* UpdateUser.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -204,6 +210,14 @@
 				7DB9390629674DEF00C28F95 /* SettingsEditorView.swift */,
 			);
 			path = SettingsEditorViewController;
+			sourceTree = "<group>";
+		};
+		7DB9390C296B014800C28F95 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7DB9390A296B013F00C28F95 /* Base.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		98D48F98719A38CD9A097AB4 /* Pods */ = {
@@ -337,8 +351,10 @@
 				7D97BD442961D5E100A4FBB6 /* SignUpViewController.swift in Sources */,
 				7DB9390729674DEF00C28F95 /* SettingsEditorView.swift in Sources */,
 				7DB938F82965AB2000C28F95 /* ChatTabBarController.swift in Sources */,
+				7DB9390E296B541A00C28F95 /* UpdateUser.swift in Sources */,
 				7DB938FF2965AC9000C28F95 /* SettingsViewController.swift in Sources */,
 				7D45C917295C62A60081FF62 /* AppDelegate.swift in Sources */,
+				7DB9390B296B013F00C28F95 /* Base.swift in Sources */,
 				7DB93909296875FF00C28F95 /* GetCurrentUser.swift in Sources */,
 				7DB938F6296324B100C28F95 /* UserRegister.swift in Sources */,
 				7D81DC6B295F15A700D2C62E /* ApiManager.swift in Sources */,

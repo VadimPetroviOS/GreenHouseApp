@@ -64,6 +64,10 @@ enum ApiType {
             request.httpMethod = "GET"
             request.setValue("application/json", forHTTPHeaderField: "accept")
             return request
+        case .updateUser:
+            request.httpMethod = "PUT"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            return request
         default:
             request.httpMethod = "GET"
             return request
@@ -121,13 +125,13 @@ class ApiManager {
         task.resume()
     }
     
-    func userRegister(number: String, name: String, userName: String, completion : @escaping (UserRegister?) -> ()) {
+    func userRegister(number: String, name: String, username: String, completion : @escaping (UserRegister?) -> ()) {
         var request = ApiType.userRegister.request
         
         let parameters : [String: AnyHashable] = [
             "phone": "\(number)",
             "name": "\(name)",
-            "username": "\(userName)"
+            "username": "\(username)"
         ]
         
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed)
@@ -157,9 +161,6 @@ class ApiManager {
             guard let data = data, error == nil else {
                 return
             }
-            let httpResponse = responce as! HTTPURLResponse
-            print(httpResponse.statusCode)
-            
             do {
                 let responce = try JSONDecoder().decode(GetCurrentUser.self, from: data)
                 //print("SUCCESS: \(responce)")
@@ -173,27 +174,76 @@ class ApiManager {
         }
         task.resume()
     }
+    
+    func updateUser(uploadDataModel: UpdateUser, completion : @escaping (UpdateUser?) -> ()) {
+        var request = ApiType.updateUser.request
+        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMwOCwidXNlcm5hbWUiOiJCdXNpZG9DYWQiLCJwaG9uZSI6IjkxNzEyMzQ1NjciLCJpYXQiOjE2NzMyOTU2MTgsImV4cCI6MTY3MzI5NjIxOH0.tX7AtJTGIY5Hs3W5vgPuc4oZwXYpdg2Y0yUakxHVCxw"
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
+                    print("Error: Trying to convert model to JSON data")
+                    return
+        }
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else {
+                print("Error: error calling PUT")
+                print(error!)
+                return
+            }
+            guard let data = data else {
+                print("Error: Did not receive data")
+                return
+            }
+            guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                print("Error: HTTP request failed")
+                let httpResponse = response as! HTTPURLResponse
+                print(httpResponse.statusCode)
+                return
+            }
+            
+            do {
+                guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                    print("Error: Cannot convert data to JSON object")
+                    return
+                }
+                guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                    print("Error: Cannot convert JSON object to Pretty JSON data")
+                    return
+                }
+                guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                    print("Error: Could print JSON in String")
+                    return
+                }
+                                
+                print(prettyPrintedJson)
+            }
+            catch {
+                print("FAILURE: \(error)")
+            }
+        }
+        task.resume()
+    }
 }
-// 0101a4ab-d39f-4d4b-873c-5f20388bf207
-
-/* if request.setValue(accessToken, forHTTPHeaderField: "Authorization")
- FAILURE: dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: Optional(Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around line 1, column 0." UserInfo={NSDebugDescription=Invalid value around line 1, column 0., NSJSONSerializationErrorIndex=0})))
- */
-
-/* request.setValue("pipi", forHTTPHeaderField: "Authorization")
- FAILURE: dataCorrupted(Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: Optional(Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around line 1, column 0." UserInfo={NSDebugDescription=Invalid value around line 1, column 0., NSJSONSerializationErrorIndex=0})))
-
- */
-
-/* request.setValue("Bearer access token", forHTTPHeaderField: "Authorization")
- FAILURE: keyNotFound(CodingKeys(stringValue: "profile_data", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"profile_data\", intValue: nil) (\"profile_data\").", underlyingError: nil))
- */
 
 /*
- FAILURE: typeMismatch(Swift.Double, Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "profile_data", intValue: nil), CodingKeys(stringValue: "created", intValue: nil)], debugDescription: "Expected to decode Double but found a string/data instead.", underlyingError: nil))
-
- */
-
-/* let responce = try JSONDecoder().decode(SendAuthCode.self, from: data)
- FAILURE: keyNotFound(CodingKeys(stringValue: "is_success", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"is_success\", intValue: nil) (\"is_success\").", underlyingError: nil))
+ let avatar : [String: AnyHashable] = [
+     "filename": "\(uploadDataModel.avatar!.filename)",
+     "base64": "\(uploadDataModel.avatar!.base64)",
+ ]
+ let parameters : [String: AnyHashable] = [
+     "name": "\(uploadDataModel.name)",
+     "username": "\(uploadDataModel.username)",
+     "birthday": "\(uploadDataModel.birthday)",
+     "city": "\(uploadDataModel.city)",
+     "vk": "\(uploadDataModel.vk)",
+     "instagram": "\(uploadDataModel.instagram)",
+     "status": "\(uploadDataModel.status)",
+     "avatar": avatar
+ ]
+ print(avatar)
+ print(parameters)
+ guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed) else { return }
+ request.httpBody = httpBody
  */
