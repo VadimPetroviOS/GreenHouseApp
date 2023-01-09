@@ -68,7 +68,7 @@ class SettingsView: UIView {
         return label
     }()
     
-    let birthDayLabel: UILabel = {
+    let birthdayLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
@@ -133,8 +133,8 @@ class SettingsView: UIView {
             phoneLabel.heightAnchor.constraint(equalToConstant: 50),
             cityLabel.widthAnchor.constraint(equalToConstant: 250),
             cityLabel.heightAnchor.constraint(equalToConstant: 50),
-            birthDayLabel.widthAnchor.constraint(equalToConstant: 250),
-            birthDayLabel.heightAnchor.constraint(equalToConstant: 50),
+            birthdayLabel.widthAnchor.constraint(equalToConstant: 250),
+            birthdayLabel.heightAnchor.constraint(equalToConstant: 50),
             aboutMeLabel.widthAnchor.constraint(equalToConstant: 250),
             aboutMeLabel.heightAnchor.constraint(equalToConstant: 150),
         ])
@@ -145,7 +145,7 @@ class SettingsView: UIView {
                                                        userNameLabel,
                                                        phoneLabel,
                                                        cityLabel,
-                                                       birthDayLabel,
+                                                       birthdayLabel,
                                                        aboutMeLabel,
                                                        view])
         stackView.axis = .vertical

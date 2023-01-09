@@ -9,11 +9,23 @@ import UIKit
 
 protocol SettingsEditorViewControllerDelegate: AnyObject {
     func presentPicker()
+    func saveSettings()
 }
 
 class SettingsEditorView: UIView {
     
     weak var delegate: SettingsEditorViewControllerDelegate?
+    
+    var saveButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.tintColor = .systemGreen
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
+        UIView().layoutIfNeeded()
+        //button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     let avatarImage: UIImageView = {
         let image = UIImageView()
@@ -30,7 +42,6 @@ class SettingsEditorView: UIView {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .black
-        label.text = "  **** ******"
         label.textAlignment = .center
         label.layer.cornerRadius = 5
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +54,6 @@ class SettingsEditorView: UIView {
         label.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
         label.textColor = .darkGray
         label.layer.cornerRadius = 5
-        label.text = "  +7927999999"
         label.layer.cornerRadius = 5
         return label
     }()
@@ -54,7 +64,7 @@ class SettingsEditorView: UIView {
         textfield.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
         textfield.textColor = .darkGray
         textfield.layer.cornerRadius = 5
-        textfield.text = "  *****"
+        textfield.placeholder = "   city"
         return textfield
     }()
     
@@ -64,6 +74,7 @@ class SettingsEditorView: UIView {
         textfield.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
         textfield.textColor = .darkGray
         textfield.layer.cornerRadius = 5
+        textfield.placeholder = "   date"
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
@@ -115,6 +126,7 @@ class SettingsEditorView: UIView {
     private func setConstraints() {
         let stack = createStackView()
         self.addSubview(stack)
+        self.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
@@ -134,6 +146,11 @@ class SettingsEditorView: UIView {
             birthDayTF.heightAnchor.constraint(equalToConstant: 50),
             aboutMeTV.widthAnchor.constraint(equalToConstant: 250),
             aboutMeTV.heightAnchor.constraint(equalToConstant: 150),
+            
+            saveButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
+            saveButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -75),
+            saveButton.widthAnchor.constraint(equalToConstant: 25),
+            saveButton.heightAnchor.constraint(equalToConstant: 25),
         ])
     }
     
@@ -162,11 +179,15 @@ class SettingsEditorView: UIView {
         delegate?.presentPicker()
     }
     
-    @objc func doneAction() {
+    @objc private func doneAction() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         birthDayTF.text = formatter.string(from: dataPicker.date)
         self.endEditing(true)
+    }
+    
+    @objc private func addPressed() {
+        delegate?.saveSettings()
     }
     
 }

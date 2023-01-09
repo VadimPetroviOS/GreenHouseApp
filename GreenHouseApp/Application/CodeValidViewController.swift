@@ -73,35 +73,44 @@ extension CodeValidViewController: CodeValidViewControllerDelegate  {
             DispatchQueue.main.async {
                 self.responce = data?.isUserExists
                 let accessToken = data?.accessToken
+                print(accessToken)
                 // GET SettingsView
                 ApiManager.shared.getCurrentUser(accessToken: accessToken!) { (information) in
+                    let name = information?.profileData.name
                     let username = information?.profileData.username
                     let city = information?.profileData.city
                     let birthday = information?.profileData.birthday
                     let vk = information?.profileData.vk
                     let instagram = information?.profileData.instagram
+                    let status = information?.profileData.status
+                    let filename = information?.profileData.avatar
+                    let base64 = information?.profileData.avatar
                     
-                    if self.responce == true {
-                        let chatVC = ChatTabBarController(phoneNumber: self.phoneNumber,
-                                                          username: username,
-                                                          city: city,
-                                                          birthday: birthday,
-                                                          vk: vk,
-                                                          instagram: instagram)
-                        self.navigationController?.pushViewController(chatVC, animated: true)
-                    } else {
-                        let signUpVC = SignUpViewController(phoneNumber: self.phoneNumber)
-                        self.navigationController?.pushViewController(signUpVC, animated: true)
+                    Base.shared.saveData(phone: self.phoneNumber,
+                                        name: name,
+                                        username: username,
+                                        city: city,
+                                        birthday: birthday,
+                                        vk: vk,
+                                        instagram: instagram,
+                                        status: status,
+                                        filename: filename,
+                                        base64: base64)
+                    
+                    DispatchQueue.main.async {
+                        if self.responce == true {
+                            let chatVC = ChatTabBarController()
+                            self.navigationController?.pushViewController(chatVC, animated: true)
+                        } else {
+                            let signUpVC = SignUpViewController(phoneNumber: self.phoneNumber)
+                            self.navigationController?.pushViewController(signUpVC, animated: true)
+                        }
                     }
+                    
                 }
                 
                 
-                
-            }
+            }   
         }
-        
-        
-        
     }
 }
-
