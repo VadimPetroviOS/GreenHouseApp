@@ -67,6 +67,7 @@ enum ApiType {
         case .updateUser:
             request.httpMethod = "PUT"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "accept")
             return request
         default:
             request.httpMethod = "GET"
@@ -85,7 +86,7 @@ class ApiManager {
         request.httpBody = httpBody
         let task = URLSession.shared.dataTask(with: request) { (data, responce, error) in
             if let responce = responce {
-                //print(responce)
+                //print("SUCCESS: \(responce)")
             }
             guard let data = data else { return }
             do {
@@ -174,76 +175,49 @@ class ApiManager {
         }
         task.resume()
     }
-    
-    func updateUser(uploadDataModel: UpdateUser, completion : @escaping (UpdateUser?) -> ()) {
+
+    func updateUser() {
         var request = ApiType.updateUser.request
-        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMwOCwidXNlcm5hbWUiOiJCdXNpZG9DYWQiLCJwaG9uZSI6IjkxNzEyMzQ1NjciLCJpYXQiOjE2NzMyOTU2MTgsImV4cCI6MTY3MzI5NjIxOH0.tX7AtJTGIY5Hs3W5vgPuc4oZwXYpdg2Y0yUakxHVCxw"
-        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        
-        guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
-                    print("Error: Trying to convert model to JSON data")
-                    return
-        }
-        request.httpBody = jsonData
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                print("Error: error calling PUT")
-                print(error!)
-                return
-            }
-            guard let data = data else {
-                print("Error: Did not receive data")
-                return
-            }
-            guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-                print("Error: HTTP request failed")
-                let httpResponse = response as! HTTPURLResponse
-                print(httpResponse.statusCode)
+        request.setValue("Bearer \(Base.shared.userData[0].accessToken!)", forHTTPHeaderField: "Authorization")
+        let parameters : [String: AnyHashable] = [
+            "name": "\(Base.shared.userData[0].name!)",
+            "username": "\(Base.shared.userData[0].username!)",
+            "birthday": "\(Base.shared.userData[0].birthday!)",
+            "city": "\(Base.shared.userData[0].city!)",
+            "vk": "\(Base.shared.userData[0].vk!)",
+            "instagram": "\(Base.shared.userData[0].instagram!)",
+            "status": "\(Base.shared.userData[0].status!)",
+            "avatar": ["filename": "string", "base_64": "string"]
+        ]
+        guard let data = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) else { return }
+        URLSession.shared.uploadTask(with: request, from: data) { (responseData, response, error) in
+            if let error = error {
+                print("Error making PUT request: \(error)")
                 return
             }
             
-            do {
-                guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                    print("Error: Cannot convert data to JSON object")
+            if let responseCode = (response as? HTTPURLResponse)?.statusCode, let responseData = responseData {
+                /*
+                guard responseCode == 200 else {
+                    print("Invalid response code: \(responseCode)")
                     return
                 }
-                guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                    print("Error: Cannot convert JSON object to Pretty JSON data")
-                    return
+                */
+                if let responseJSONData = try? JSONSerialization.jsonObject(with: responseData, options: .allowFragments) {
+                    print("Response JSON data = \(responseJSONData)")
                 }
-                guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                    print("Error: Could print JSON in String")
-                    return
-                }
-                                
-                print(prettyPrintedJson)
             }
-            catch {
-                print("FAILURE: \(error)")
-            }
-        }
-        task.resume()
+        }.resume()
     }
 }
 
 /*
- let avatar : [String: AnyHashable] = [
-     "filename": "\(uploadDataModel.avatar!.filename)",
-     "base64": "\(uploadDataModel.avatar!.base64)",
- ]
- let parameters : [String: AnyHashable] = [
-     "name": "\(uploadDataModel.name)",
-     "username": "\(uploadDataModel.username)",
-     "birthday": "\(uploadDataModel.birthday)",
-     "city": "\(uploadDataModel.city)",
-     "vk": "\(uploadDataModel.vk)",
-     "instagram": "\(uploadDataModel.instagram)",
-     "status": "\(uploadDataModel.status)",
-     "avatar": avatar
- ]
- print(avatar)
- print(parameters)
- guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed) else { return }
- request.httpBody = httpBody
+ 
+ */
+
+
+/*
+ 
+ let avatar = Avatar(filename: "string", base64: "string")
+ let uploadData = UpdateUser(name: "Alexander", username: "Busidocad", birthday: "string", city: "city", vk: "vk", instagram: "uhsibda", status: "status", avatar: avatar)
  */

@@ -23,7 +23,7 @@ class SettingsEditorView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
         UIView().layoutIfNeeded()
-        //button.translatesAutoresizingMaskIntoConstraints = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -65,6 +65,9 @@ class SettingsEditorView: UIView {
         textfield.textColor = .darkGray
         textfield.layer.cornerRadius = 5
         textfield.placeholder = "   city"
+        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        textfield.leftViewMode = UITextField.ViewMode.always
+        textfield.leftView = spacerView
         return textfield
     }()
     
@@ -81,6 +84,9 @@ class SettingsEditorView: UIView {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.setItems([flexSpace, doneButton], animated: true)
         textfield.inputAccessoryView = toolbar
+        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        textfield.leftViewMode = UITextField.ViewMode.always
+        textfield.leftView = spacerView
         return textfield
     }()
     
@@ -91,13 +97,38 @@ class SettingsEditorView: UIView {
         return dataPicker
     }()
     
-    let aboutMeTV: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
-        textView.textColor = .darkGray
-        textView.layer.cornerRadius = 5
-        return textView
+    let aboutMeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.text = "About Me"
+        return label
+    }()
+    
+    let vkTF: UITextField = {
+        let textfield = UITextField()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
+        textfield.textColor = .darkGray
+        textfield.layer.cornerRadius = 5
+        textfield.placeholder = "  vk.com/"
+        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        textfield.leftViewMode = UITextField.ViewMode.always
+        textfield.leftView = spacerView
+        return textfield
+    }()
+    
+    let instaTF: UITextField = {
+        let textfield = UITextField()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
+        textfield.textColor = .darkGray
+        textfield.layer.cornerRadius = 5
+        textfield.placeholder = "  www.instagram.com/"
+        let spacerView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        textfield.leftViewMode = UITextField.ViewMode.always
+        textfield.leftView = spacerView
+        return textfield
     }()
     
     let view : UIView = {
@@ -108,7 +139,8 @@ class SettingsEditorView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = Colors.grayBackground
+        phoneLabel.text = "  \(Base.shared.userData[0].phone)"
         setConstraints()
         configAvatar()
         setDataPicker()
@@ -123,10 +155,17 @@ class SettingsEditorView: UIView {
         fatalError()
     }
     
+    private func setSubviews() {
+        self.addSubview(saveButton)
+        self.addSubview(aboutMeLabel)
+        self.addSubview(vkTF)
+        self.addSubview(instaTF)
+    }
+    
     private func setConstraints() {
         let stack = createStackView()
         self.addSubview(stack)
-        self.addSubview(saveButton)
+        setSubviews()
         
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
@@ -144,8 +183,17 @@ class SettingsEditorView: UIView {
             cityTF.heightAnchor.constraint(equalToConstant: 50),
             birthDayTF.widthAnchor.constraint(equalToConstant: 250),
             birthDayTF.heightAnchor.constraint(equalToConstant: 50),
-            aboutMeTV.widthAnchor.constraint(equalToConstant: 250),
-            aboutMeTV.heightAnchor.constraint(equalToConstant: 150),
+            
+            aboutMeLabel.topAnchor.constraint(equalTo: birthDayTF.bottomAnchor,constant: 10),
+            aboutMeLabel.leadingAnchor.constraint(equalTo: birthDayTF.leadingAnchor),
+            vkTF.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor,constant: 10),
+            vkTF.leadingAnchor.constraint(equalTo: aboutMeLabel.leadingAnchor),
+            vkTF.widthAnchor.constraint(equalToConstant: 250),
+            vkTF.heightAnchor.constraint(equalToConstant: 50),
+            instaTF.topAnchor.constraint(equalTo: vkTF.bottomAnchor,constant: 10),
+            instaTF.leadingAnchor.constraint(equalTo: vkTF.leadingAnchor),
+            instaTF.widthAnchor.constraint(equalToConstant: 250),
+            instaTF.heightAnchor.constraint(equalToConstant: 50),
             
             saveButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
             saveButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -75),
@@ -160,7 +208,6 @@ class SettingsEditorView: UIView {
                                                        phoneLabel,
                                                        cityTF,
                                                        birthDayTF,
-                                                       aboutMeTV,
                                                        view])
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -181,7 +228,7 @@ class SettingsEditorView: UIView {
     
     @objc private func doneAction() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         birthDayTF.text = formatter.string(from: dataPicker.date)
         self.endEditing(true)
     }

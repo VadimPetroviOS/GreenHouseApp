@@ -20,6 +20,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view().backgroundColor = Colors.grayBackground
         view().delegate = self
         setupConfig()
     }
@@ -72,7 +73,6 @@ extension AuthorizationViewController: FPNTextFieldDelegate {
 extension AuthorizationViewController: AuthorizationViewControllerDelegate  {
     func codeValidAction() {
         let number = view().phoneTF.getRawPhoneNumber()!
-        print(number)
         ApiManager.shared.sendAuthCode(number: number) { data in
             DispatchQueue.main.async {
                 self.responce = data?.isSuccess
