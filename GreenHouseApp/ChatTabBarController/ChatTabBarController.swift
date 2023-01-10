@@ -11,6 +11,7 @@ class ChatTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Base.shared.userData[0].status)
         viewControllers = [
             createNavControler(viewControler: ContactsTableViewController(),
                                title: "Contacts",
@@ -26,8 +27,7 @@ class ChatTabBarController: UITabBarController {
                                                                      birthday: Base.shared.userData[0].birthday,
                                                                      vk: Base.shared.userData[0].vk,
                                                                      instagram: Base.shared.userData[0].instagram,
-                                                                     filename: Base.shared.userData[0].avatar.filename,
-                                                                     base64: Base.shared.userData[0].avatar.base64),
+                                                                     avatar: Base.shared.userData[0].status!),
                                title: "Settings",
                                image: Images.settingsImage,
                                backgroundColor: Colors.grayBackground)

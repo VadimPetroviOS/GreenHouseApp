@@ -27,13 +27,13 @@ class SettingsView: UIView {
     }()
     
     let avatarView: UIImageView = {
-        let image = UIImageView()
-        image.layer.cornerRadius = ConstantsForAvatar.avatarSize/2
-        image.clipsToBounds = true
-        image.image = UIImage(systemName: "camera")
-        image.contentMode = .scaleAspectFill
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = ConstantsForAvatar.avatarSize/2
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(systemName: "camera")
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     let userNameLabel: UILabel = {
@@ -53,7 +53,6 @@ class SettingsView: UIView {
         label.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
         label.textColor = .darkGray
         label.layer.cornerRadius = 5
-        label.text = "  +7927999999"
         label.layer.cornerRadius = 5
         return label
     }()
@@ -87,10 +86,28 @@ class SettingsView: UIView {
     let aboutMeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.text = "About Me"
+        return label
+    }()
+    
+    let vkLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
         label.textColor = .darkGray
         label.layer.cornerRadius = 5
-        label.text = ""
+        label.text = "  vk.com/"
+        return label
+    }()
+    
+    let instaLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor(white: 0.7, alpha: 0.2)
+        label.textColor = .darkGray
+        label.layer.cornerRadius = 5
+        label.text = "  www.instagram.com/"
         return label
     }()
     
@@ -102,6 +119,7 @@ class SettingsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setSubviews()
         setConstraints()
     }
     
@@ -109,11 +127,17 @@ class SettingsView: UIView {
         fatalError()
     }
     
+    private func setSubviews() {
+        self.addSubview(aboutMeLabel)
+        aboutMeLabel.addSubview(vkLabel)
+        aboutMeLabel.addSubview(instaLabel)
+    }
+    
     private func setConstraints() {
         let stack = createStackView()
         self.addSubview(stack)
         self.addSubview(editorButton)
-       
+        
         NSLayoutConstraint.activate([
             editorButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
             editorButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -75),
@@ -135,8 +159,17 @@ class SettingsView: UIView {
             cityLabel.heightAnchor.constraint(equalToConstant: 50),
             birthdayLabel.widthAnchor.constraint(equalToConstant: 250),
             birthdayLabel.heightAnchor.constraint(equalToConstant: 50),
-            aboutMeLabel.widthAnchor.constraint(equalToConstant: 250),
-            aboutMeLabel.heightAnchor.constraint(equalToConstant: 150),
+            
+            aboutMeLabel.topAnchor.constraint(equalTo: birthdayLabel.bottomAnchor,constant: 10),
+            aboutMeLabel.leadingAnchor.constraint(equalTo: birthdayLabel.leadingAnchor),
+            vkLabel.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor,constant: 10),
+            vkLabel.leadingAnchor.constraint(equalTo: aboutMeLabel.leadingAnchor),
+            vkLabel.widthAnchor.constraint(equalToConstant: 250),
+            vkLabel.heightAnchor.constraint(equalToConstant: 50),
+            instaLabel.topAnchor.constraint(equalTo: vkLabel.bottomAnchor,constant: 10),
+            instaLabel.leadingAnchor.constraint(equalTo: vkLabel.leadingAnchor),
+            instaLabel.widthAnchor.constraint(equalToConstant: 250),
+            instaLabel.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
@@ -146,7 +179,6 @@ class SettingsView: UIView {
                                                        phoneLabel,
                                                        cityLabel,
                                                        birthdayLabel,
-                                                       aboutMeLabel,
                                                        view])
         stackView.axis = .vertical
         stackView.alignment = .center

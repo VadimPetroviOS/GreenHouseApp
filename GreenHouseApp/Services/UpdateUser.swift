@@ -10,7 +10,7 @@ import Foundation
 struct UpdateUser: Codable {
     let name, username, birthday, city: String
     let vk, instagram, status: String
-    let avatar: Avatar?
+    let avatar: Avatar
 }
 
 struct Avatar: Codable {

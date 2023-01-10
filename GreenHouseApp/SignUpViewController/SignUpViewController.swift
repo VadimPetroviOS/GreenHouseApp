@@ -8,7 +8,6 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-    var phoneNumber: String
     
     override func loadView() {
         self.view = SignUpView()
@@ -16,21 +15,13 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view().backgroundColor = Colors.grayBackground
         view().delegate = self
-        view().phoneLabel.text = "  \(phoneNumber)"
+        view().phoneLabel.text = "  \(Base.shared.userData[0].phone)"
     }
     
     func view() -> SignUpView {
        return self.view as! SignUpView
-    }
-    
-    init(phoneNumber: String) {
-        self.phoneNumber = phoneNumber
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("")
     }
 }
 
@@ -38,8 +29,10 @@ extension SignUpViewController: SignUpViewControllerDelegate  {
     func chatBarAction() {
         let name = view().nameTF.text!
         let username = view().nicknameTF.text!
-        
-        Base.shared.saveData(phone: phoneNumber,
+        let phone = Base.shared.userData[0].phone
+        Base.shared.saveData(accessToken: Base.shared.userData[0].accessToken,
+                             refreshToken: Base.shared.userData[0].refreshToken,
+                             phone: phone,
                              name: name,
                              username: username,
                              city: nil,
@@ -47,10 +40,9 @@ extension SignUpViewController: SignUpViewControllerDelegate  {
                              vk: nil,
                              instagram: nil,
                              status: nil,
-                             filename: nil,
-                             base64: nil)
+                             avatar: nil)
         
-        ApiManager.shared.userRegister(number: phoneNumber, name: name, username: username) { (data) in
+        ApiManager.shared.userRegister(number: phone, name: name, username: username) { (data) in
             DispatchQueue.main.async {
                 if data != nil {
                     let chatVC = ChatTabBarController()

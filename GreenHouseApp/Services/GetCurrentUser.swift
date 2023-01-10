@@ -27,3 +27,6 @@ struct ProfileData: Codable {
     }
 }
 
+struct Avatars: Codable {
+    let avatar, bigAvatar, miniAvatar: String
+}

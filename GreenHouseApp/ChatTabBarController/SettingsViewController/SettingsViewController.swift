@@ -14,8 +14,7 @@ class SettingsViewController: UIViewController {
     var birthday: String?
     var vk: String?
     var instagram: String?
-    var filename: String?
-    var base64: String?
+    var avatar: String
     
     override func loadView() {
         self.view = SettingsView()
@@ -23,27 +22,36 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(view().cityLabel.text)
+        view().backgroundColor = Colors.grayBackground
         view().delegate = self
         view().phoneLabel.text = "  \(phoneNumber)"
-        view().userNameLabel.text = username
-        view().cityLabel.text = city
-        view().birthdayLabel.text = birthday
+        view().userNameLabel.text = "  \(username!)"
+        view().cityLabel.text = "  \(city!)"
+        view().birthdayLabel.text = "  \(birthday!)"
+        view().vkLabel.text = "  \(vk!)"
+        view().instaLabel.text = "  \(instagram!)"
+        
+       
+        let newImageData = Data(base64Encoded: avatar, options: .ignoreUnknownCharacters)
+        if let newImageData = newImageData {
+            view().avatarView.image = UIImage(data: newImageData)
+        }
+        
+        //view().reloadInputViews()
     }
     
     func view() -> SettingsView {
        return self.view as! SettingsView
     }
     
-    init(phoneNumber: String, username: String?, city: String?, birthday: String?, vk: String?, instagram: String?, filename: String?, base64: String?) {
+    init(phoneNumber: String, username: String?, city: String?, birthday: String?, vk: String?, instagram: String?, avatar: String?) {
         self.phoneNumber = phoneNumber
         self.username = username ?? ""
         self.city = city ?? ""
         self.birthday = birthday ?? ""
         self.vk = vk ?? ""
         self.instagram = instagram ?? ""
-        self.filename = filename ?? ""
-        self.base64 = base64 ?? ""
+        self.avatar = avatar ?? ""
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -51,6 +59,7 @@ class SettingsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
 }
 
 extension SettingsViewController: SettingsViewControllerDelegate  {
@@ -59,3 +68,5 @@ extension SettingsViewController: SettingsViewControllerDelegate  {
         present(settingsEdditorVC, animated: true)
     }
 }
+
+

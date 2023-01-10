@@ -19,6 +19,7 @@ class CodeValidViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view().backgroundColor = Colors.grayBackground
         view().delegate = self
         setupConfig()
     }
@@ -73,7 +74,8 @@ extension CodeValidViewController: CodeValidViewControllerDelegate  {
             DispatchQueue.main.async {
                 self.responce = data?.isUserExists
                 let accessToken = data?.accessToken
-                print(accessToken)
+                let refreshToken = data?.refreshToken
+            
                 // GET SettingsView
                 ApiManager.shared.getCurrentUser(accessToken: accessToken!) { (information) in
                     let name = information?.profileData.name
@@ -83,26 +85,26 @@ extension CodeValidViewController: CodeValidViewControllerDelegate  {
                     let vk = information?.profileData.vk
                     let instagram = information?.profileData.instagram
                     let status = information?.profileData.status
-                    let filename = information?.profileData.avatar
-                    let base64 = information?.profileData.avatar
-                    
-                    Base.shared.saveData(phone: self.phoneNumber,
-                                        name: name,
-                                        username: username,
-                                        city: city,
-                                        birthday: birthday,
-                                        vk: vk,
-                                        instagram: instagram,
-                                        status: status,
-                                        filename: filename,
-                                        base64: base64)
+                    let avatar = information?.profileData.avatar
+                    print(status)
+                    Base.shared.saveData(accessToken: accessToken!,
+                                         refreshToken: refreshToken!,
+                                         phone: self.phoneNumber,
+                                         name: name,
+                                         username: username,
+                                         city: city,
+                                         birthday: birthday,
+                                         vk: vk,
+                                         instagram: instagram,
+                                         status: status,
+                                         avatar: avatar)
                     
                     DispatchQueue.main.async {
                         if self.responce == true {
                             let chatVC = ChatTabBarController()
                             self.navigationController?.pushViewController(chatVC, animated: true)
                         } else {
-                            let signUpVC = SignUpViewController(phoneNumber: self.phoneNumber)
+                            let signUpVC = SignUpViewController()
                             self.navigationController?.pushViewController(signUpVC, animated: true)
                         }
                     }
