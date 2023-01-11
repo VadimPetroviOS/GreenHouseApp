@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        // Не успел сделать картинки знаков зодиака
         super.viewDidLoad()
         view().backgroundColor = Colors.grayBackground
         view().delegate = self
@@ -31,13 +32,6 @@ class SettingsViewController: UIViewController {
         view().vkLabel.text = "  \(vk!)"
         view().instaLabel.text = "  \(instagram!)"
         
-       
-        let newImageData = Data(base64Encoded: avatar, options: .ignoreUnknownCharacters)
-        if let newImageData = newImageData {
-            view().avatarView.image = UIImage(data: newImageData)
-        }
-        
-        //view().reloadInputViews()
     }
     
     func view() -> SettingsView {
@@ -65,6 +59,12 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: SettingsViewControllerDelegate  {
     func settingsEditorAction() {
         let settingsEdditorVC = SettingsEditorViewController()
+        settingsEdditorVC.callback = {
+            self.view().cityLabel.text = "  \(Base.shared.userData[0].city!)"
+            self.view().birthdayLabel.text = "  \(Base.shared.userData[0].birthday!)"
+            self.view().vkLabel.text = "  \(Base.shared.userData[0].vk!)"
+            self.view().instaLabel.text = "  \(Base.shared.userData[0].instagram!)"
+        }
         present(settingsEdditorVC, animated: true)
     }
 }

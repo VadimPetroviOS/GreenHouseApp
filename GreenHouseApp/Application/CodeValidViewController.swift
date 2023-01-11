@@ -75,44 +75,34 @@ extension CodeValidViewController: CodeValidViewControllerDelegate  {
                 self.responce = data?.isUserExists
                 let accessToken = data?.accessToken
                 let refreshToken = data?.refreshToken
-            
-                // GET SettingsView
-                ApiManager.shared.getCurrentUser(accessToken: accessToken!) { (information) in
-                    let name = information?.profileData.name
-                    let username = information?.profileData.username
-                    let city = information?.profileData.city
-                    let birthday = information?.profileData.birthday
-                    let vk = information?.profileData.vk
-                    let instagram = information?.profileData.instagram
-                    let status = information?.profileData.status
-                    let avatar = information?.profileData.avatar
-                    print(status)
-                    Base.shared.saveData(accessToken: accessToken!,
-                                         refreshToken: refreshToken!,
-                                         phone: self.phoneNumber,
-                                         name: name,
-                                         username: username,
-                                         city: city,
-                                         birthday: birthday,
-                                         vk: vk,
-                                         instagram: instagram,
-                                         status: status,
-                                         avatar: avatar)
-                    
-                    DispatchQueue.main.async {
-                        if self.responce == true {
+                let isUserExists = data?.isUserExists
+                
+                if isUserExists == true {
+                    guard let token = accessToken else { return }
+                    ApiManager.shared.getCurrentUser(accessToken: token) { data in
+                        DispatchQueue.main.async {
+                            Base.shared.userData[0].accessToken = accessToken
+                            Base.shared.userData[0].refreshToken = refreshToken
+                            Base.shared.userData[0].phone = data?.profileData.phone
+                            Base.shared.userData[0].name = data?.profileData.name
+                            Base.shared.userData[0].username = data?.profileData.username
+                            Base.shared.userData[0].city = data?.profileData.city
+                            Base.shared.userData[0].birthday = data?.profileData.birthday
+                            Base.shared.userData[0].vk = data?.profileData.vk
+                            Base.shared.userData[0].instagram = data?.profileData.instagram
+                            Base.shared.userData[0].status = data?.profileData.status
+                            Base.shared.userData[0].avatar = data?.profileData.avatar
+                            
                             let chatVC = ChatTabBarController()
                             self.navigationController?.pushViewController(chatVC, animated: true)
-                        } else {
-                            let signUpVC = SignUpViewController()
-                            self.navigationController?.pushViewController(signUpVC, animated: true)
                         }
                     }
                     
+                } else {
+                    let signUpVC = SignUpViewController(phoneNumber: self.phoneNumber)
+                    self.navigationController?.pushViewController(signUpVC, animated: true)
                 }
-                
-                
-            }   
+            }
         }
     }
 }

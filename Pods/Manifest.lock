@@ -2,17 +2,23 @@ PODS:
   - FlagPhoneNumber (0.8.0):
     - FlagPhoneNumber/libPhoneNumberiOS (= 0.8.0)
   - FlagPhoneNumber/libPhoneNumberiOS (0.8.0)
+  - SDWebImage (5.13.3):
+    - SDWebImage/Core (= 5.13.3)
+  - SDWebImage/Core (5.13.3)
 
 DEPENDENCIES:
   - FlagPhoneNumber
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
     - FlagPhoneNumber
+    - SDWebImage
 
 SPEC CHECKSUMS:
   FlagPhoneNumber: 3712455b95f66cb0f2016fef7d9e34cddf8c7f9a
+  SDWebImage: af5bbffef2cde09f148d826f9733dcde1a9414cd
 
-PODFILE CHECKSUM: 88ccc7efeab60a5b2b203a29c6585c0f7f9322dc
+PODFILE CHECKSUM: eb0fde9604d45c0535fd01613f993d9b827b9073
 
 COCOAPODS: 1.11.3

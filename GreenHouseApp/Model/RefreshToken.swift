@@ -1,13 +1,13 @@
 //
-//  UserRegister.swift
+//  RefreshToken.swift
 //  GreenHouseApp
 //
-//  Created by Вадим on 02.01.2023.
+//  Created by Вадим on 10.01.2023.
 //
 
 import Foundation
 
-struct UserRegister: Codable {
+struct RefreshToken: Codable {
     let refreshToken, accessToken: String
     let userID: Int
 

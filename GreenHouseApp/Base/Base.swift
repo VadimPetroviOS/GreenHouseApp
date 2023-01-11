@@ -14,7 +14,7 @@ class Base {
     struct UserData: Codable {
         var accessToken: String!
         var refreshToken: String!
-        var phone: String
+        var phone: String!
         var name: String?
         var username: String?
         var city: String?

@@ -15,7 +15,6 @@ enum ApiType {
     case getCurrentUser
     case updateUser
     case refreshToken
-    case checkJWT
     
     var baseURL: String {
         return "https://plannerok.ru/"
@@ -39,7 +38,6 @@ enum ApiType {
         case .userRegister: return "api/v1/users/register/"
         case .getCurrentUser, .updateUser: return "api/v1/users/me/"
         case .refreshToken: return "api/v1/users/refresh-token/"
-        case .checkJWT: return "api/v1/users/check-jwt/"
         }
     }
     
@@ -69,8 +67,10 @@ enum ApiType {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.setValue("application/json", forHTTPHeaderField: "accept")
             return request
-        default:
-            request.httpMethod = "GET"
+        case .refreshToken:
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "accept")
             return request
         }
     }
@@ -120,6 +120,7 @@ class ApiManager {
                 completion(responce)
             }
             catch {
+                print("FAILURE: \(error)")
                 completion(nil)
             }
         }
@@ -145,7 +146,7 @@ class ApiManager {
             
             do {
                 let responce = try JSONDecoder().decode(UserRegister.self, from: data)
-                //print("SUCCESS: \(responce)")
+                print("SUCCESS: \(responce)")
                 completion(responce)
             }
             catch {
@@ -164,7 +165,7 @@ class ApiManager {
             }
             do {
                 let responce = try JSONDecoder().decode(GetCurrentUser.self, from: data)
-                //print("SUCCESS: \(responce)")
+                print("SUCCESS: \(responce)")
                 completion(responce)
             }
             catch {
@@ -186,7 +187,7 @@ class ApiManager {
             "city": "\(Base.shared.userData[0].city!)",
             "vk": "\(Base.shared.userData[0].vk!)",
             "instagram": "\(Base.shared.userData[0].instagram!)",
-            "status": "\(Base.shared.userData[0].status!)",
+            "status": "string",
             "avatar": ["filename": "string", "base_64": "string"]
         ]
         guard let data = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) else { return }
@@ -202,22 +203,35 @@ class ApiManager {
                     print("Invalid response code: \(responseCode)")
                     return
                 }
-                */
+                
                 if let responseJSONData = try? JSONSerialization.jsonObject(with: responseData, options: .allowFragments) {
                     print("Response JSON data = \(responseJSONData)")
                 }
+                */
             }
         }.resume()
     }
+    
+    func refreshToken(refreshToken: String, completion : @escaping (RefreshToken?) -> ()) {
+        var request = ApiType.refreshToken.request
+        let parameters = ["refresh_token": refreshToken]
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response {
+                //print("SUCCESS: \(response)")
+            }
+            guard let data = data else { return }
+            do {
+                let refreshToken = try? JSONDecoder().decode(RefreshToken.self, from: data)
+                
+                completion(refreshToken)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
 }
-
-/*
- 
- */
-
-
-/*
- 
- let avatar = Avatar(filename: "string", base64: "string")
- let uploadData = UpdateUser(name: "Alexander", username: "Busidocad", birthday: "string", city: "city", vk: "vk", instagram: "uhsibda", status: "status", avatar: avatar)
- */

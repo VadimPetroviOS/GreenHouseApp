@@ -8,5 +8,6 @@ target 'GreenHouseApp' do
   # Pods for GreenHouseApp
 
 	pod "FlagPhoneNumber"
+	pod 'SDWebImage'
 
 end

@@ -11,7 +11,6 @@ class ChatTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Base.shared.userData[0].status)
         viewControllers = [
             createNavControler(viewControler: ContactsTableViewController(),
                                title: "Contacts",
@@ -27,7 +26,7 @@ class ChatTabBarController: UITabBarController {
                                                                      birthday: Base.shared.userData[0].birthday,
                                                                      vk: Base.shared.userData[0].vk,
                                                                      instagram: Base.shared.userData[0].instagram,
-                                                                     avatar: Base.shared.userData[0].status!),
+                                                                     avatar: Base.shared.userData[0].avatar),
                                title: "Settings",
                                image: Images.settingsImage,
                                backgroundColor: Colors.grayBackground)
@@ -51,8 +50,6 @@ struct Images {
     static let messagesImage: String = "bubble.left.and.bubble.right.fill"
     static let contactsImage: String = "person.crop.circle.fill"
     static let settingsImage: String = "gear"
-    static let mediaButton: String = "paperclip"
-    static let sendButton: String = "arrow.up.circle.fill"
 }
 
 struct Colors {
