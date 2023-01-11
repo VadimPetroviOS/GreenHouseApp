@@ -194,5 +194,4 @@ class SettingsView: UIView {
 
 fileprivate struct ConstantsForAvatar {
     static let avatarSize: CGFloat = 120
-    static let offset: CGFloat = 20
 }

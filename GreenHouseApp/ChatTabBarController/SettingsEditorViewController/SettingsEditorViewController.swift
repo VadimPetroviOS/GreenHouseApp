@@ -8,11 +8,14 @@
 import UIKit
 
 class SettingsEditorViewController: UIViewController {
-   
+    
+    var callback: (() -> Void)?
+    
     override func loadView() {
         self.view = SettingsEditorView()
     }
     override func viewDidLoad() {
+        // Не успел сделать модуль сохранения картинки
         super.viewDidLoad()
         view().delegate = self
     }
@@ -37,13 +40,23 @@ extension SettingsEditorViewController: SettingsEditorViewControllerDelegate {
     
     func saveSettings() {
         
-        Base.shared.userData[0].birthday = view().birthDayTF.text
         Base.shared.userData[0].city = view().cityTF.text
+        Base.shared.userData[0].birthday = view().birthDayTF.text
         Base.shared.userData[0].vk = view().vkTF.text
         Base.shared.userData[0].instagram = view().instaTF.text
+        self.callback?()
         
+        guard let refreshToken = Base.shared.userData[0].refreshToken else { return }
+        ApiManager.shared.refreshToken(refreshToken: refreshToken) { data in
+            DispatchQueue.main.async {
+                Base.shared.userData[0].accessToken = data?.accessToken
+                Base.shared.userData[0].refreshToken = data?.refreshToken
+            }
+        }
         
         ApiManager.shared.updateUser()
+        
+        
         self.dismiss(animated: true)
     }
 }
@@ -56,12 +69,6 @@ extension SettingsEditorViewController: UIImagePickerControllerDelegate, UINavig
         if let originalImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             view().avatarImage.image = originalImage
         }
-        
-        let image = view().avatarImage.image
-        let imageData = image?.jpegData(compressionQuality: 1)
-        let imageBase64String = imageData?.base64EncodedString()
-        Base.shared.userData[0].status = imageBase64String
-        print(Base.shared.userData[0].status)
         
         picker.dismiss(animated: true)
     }

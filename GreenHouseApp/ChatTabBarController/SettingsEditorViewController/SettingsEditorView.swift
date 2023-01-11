@@ -23,7 +23,6 @@ class SettingsEditorView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
         UIView().layoutIfNeeded()
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -140,7 +139,8 @@ class SettingsEditorView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = Colors.grayBackground
-        phoneLabel.text = "  \(Base.shared.userData[0].phone)"
+        phoneLabel.text = "  \(Base.shared.userData[0].phone!)"
+        userNameLabel.text = "  \(Base.shared.userData[0].username!)"
         setConstraints()
         configAvatar()
         setDataPicker()
@@ -241,6 +241,5 @@ class SettingsEditorView: UIView {
 
 fileprivate struct ConstantsForAvatar {
     static let avatarSize: CGFloat = 120
-    static let offset: CGFloat = 20
 }
 
